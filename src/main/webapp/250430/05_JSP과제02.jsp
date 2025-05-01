@@ -79,7 +79,7 @@
 	}
 	
 	.cricle {
-	margin: 10px;
+		margin: 10px;
 	   padding: 5px;
 	   display: flex;
 	   flex-direction: row;
