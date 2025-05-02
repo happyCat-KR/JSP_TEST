@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>회원가입 - 여행사진 공유</title>
+    <title>로그인 - 여행사진 공유</title>
     <style>
         * {
             margin: 0;
@@ -78,19 +78,19 @@
             transform: translateY(-2px);
         }
 
-        .login-link {
+        .register-link {
             text-align: center;
             margin-top: 20px;
             color: #666;
         }
 
-        .login-link a {
+        .register-link a {
             color: #667eea;
             text-decoration: none;
             font-weight: 500;
         }
 
-        .login-link a:hover {
+        .register-link a:hover {
             text-decoration: underline;
         }
 
@@ -98,33 +98,26 @@
             color: #ff4444;
             font-size: 14px;
             margin-top: 5px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>회원가입</h1>
-        <form action="02_3_registerProcess.jsp" method="post">
+        <h1>로그인</h1>
+        <form action="loginProcess.jsp" method="post">
             <div class="form-group">
                 <label for="userId">아이디</label>
                 <input type="text" id="userId" name="userId" required>
             </div>
             <div class="form-group">
-                <label for="nickname">닉네임</label>
-                <input type="text" id="nickname" name="nickname" required>
-            </div>
-            <div class="form-group">
                 <label for="password">비밀번호</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <div class="form-group">
-                <label for="confirmPassword">비밀번호 확인</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" required>
-            </div>
-            <button type="submit" class="btn">회원가입</button>
+            <button type="submit" class="btn">로그인</button>
         </form>
-        <div class="login-link">
-            이미 계정이 있으신가요? <a href="02_1_login.jsp">로그인</a>
+        <div class="register-link">
+            계정이 없으신가요? <a href="register.jsp">회원가입</a>
         </div>
     </div>
 </body>

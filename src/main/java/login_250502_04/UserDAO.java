@@ -1,4 +1,4 @@
-package login;
+package login_250502_04;
 
 import java.sql.*;
 import javax.sql.*;
@@ -19,9 +19,9 @@ public class UserDAO {
 			DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/MysqlDB");
 			conn = ds.getConnection();
 
-			System.out.println("<h3>연결되었습니다.</h3>");
+			System.out.println("연결되었습니다.");
 		} catch (Exception e) {
-			System.out.println("<h3>연결에 실패했습니다.</h3>");
+			System.out.println("연결에 실패했습니다.");
 			e.printStackTrace();
 		} finally {
 			conClose();
@@ -53,11 +53,19 @@ public class UserDAO {
 			DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/MysqlDB");
 			conn = ds.getConnection();
 
-			String input = "INSERT INTO member (user_id, nickname, password) VALUES (?,?,?)";
+			String input = "INSERT INTO MEMBER_250502_04 (user_id, user_pw, user_email, user_name, user_num, user_address, user_birthday, interest, introduce)"
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? )";
 			pstmt = conn.prepareStatement(input);
-			pstmt.setString(1, userVO.getUserId());
-			pstmt.setString(2, userVO.getNickname());
-			pstmt.setString(3, userVO.getPassword());
+			pstmt.setString(1, userVO.getUser_id());
+			pstmt.setString(2, userVO.getUser_pw());
+			pstmt.setString(3, userVO.getUser_email());
+			pstmt.setString(4, userVO.getUser_name());
+			pstmt.setString(5, userVO.getUser_num());
+			pstmt.setString(6, userVO.getUser_address());
+			pstmt.setString(7, userVO.getUser_birthday());
+			pstmt.setString(8, userVO.getInterest());
+			pstmt.setString(9, userVO.getIntroduce());
+			
 
 			int result = pstmt.executeUpdate();
 			if (result > 0) {
@@ -73,28 +81,32 @@ public class UserDAO {
 
 	}
 
-	public UserVO login(String name) {
+	public UserVO login(String input_id) {
 		UserVO userVO = null;
 		try {
+			
 			Context init = new InitialContext();
 			DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/MysqlDB");
 			conn = ds.getConnection();
 			
 			
-			String sql = "SELECT password, nickname FROM MEMBER WHERE USER_ID = 'name'";
+			String sql = "SELECT user_pw, user_id FROM member_250502_04 WHERE user_id = ?";
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, input_id);
+			
+			
 			rs = pstmt.executeQuery();
-			System.out.println("1");
+			
 			if (rs.next()) {
 				
 				userVO = new UserVO();
-				String pw = rs.getString("password");
-				String nickname = rs.getString("nickname");
+				String user_pw = rs.getString("user_pw");
+				String user_id = rs.getString("user_id");
 				
-				System.out.println(pw);
-				userVO.setPassword(pw);
-				userVO.setNickname(nickname);
-
+				
+				
+				userVO.setUser_pw(user_pw);
+				userVO.setUser_id(user_id);
 				return userVO;
 
 			}

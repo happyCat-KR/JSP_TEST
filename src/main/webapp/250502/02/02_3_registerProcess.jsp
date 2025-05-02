@@ -22,6 +22,16 @@ userVO.setPassword(password);
 
 UserDAO userDAO = new UserDAO();
 
+int result = userDAO.regiset(userVO);
+
+
+if(result > 0){
+	response.sendRedirect("02_1_login.jsp");
+}else{
+	response.sendRedirect("02_2_register.jsp");
+}
+
+
 %>
 
 </body>
