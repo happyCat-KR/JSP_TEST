@@ -5,8 +5,11 @@ import javax.sql.*;
 import javax.naming.*;
 
 public class UserDAO {
+	
 
-	private Connection conn=null;
+	private Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
 	
 	public UserDAO() {
 		System.out.println("생성완료");
@@ -22,8 +25,18 @@ public class UserDAO {
 			System.out.println("<h3>연결에 실패했습니다.</h3>");
 			e.printStackTrace();
 		}
+		finally {
+			conClose();
+		}
+	}
+	
+	public void conClose() {
+		try {if(rs != null) rs.close(); }catch(Exception e) {}
+		try {if(pstmt != null) pstmt.close(); }catch(Exception e) {}
+		try {if(conn != null) conn.close(); }catch(Exception e) {}
 		
 	}
+	
 	
 	
 }
